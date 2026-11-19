@@ -1008,7 +1008,7 @@ body.f8 #skillbar .sbtn .key{bottom:auto;top:-5px;right:auto;left:-3px}
 <script>// ---- data.js ----
 // ===== 데이터: 기술 · 몬스터 · 구역 · 퀘스트 =====
 const G = (window.G = window.G || {});
-G.VERSION = '시제품 0.63.8 · 앱으로 설치';
+G.VERSION = '시제품 0.63.9 · 부탁하는 사람들 · 서운 균열';
 G.TILE = 40;
 
 // 기술 (출발점 문서 10번 화염 스킬 트리)
@@ -11165,7 +11165,7 @@ for (const q of ['s2n', 's4n', 's6n']) if (G.SUBQ[q]) G.SUBQ[q].rw = 'pot';
     fx({ type: 'swwarn', x: at.x, y: at.y, r: 150, t: 0.5, col: '#ffe08a' }); G.banner && G.banner('천재지변', 0.9);
     later(0.5, 'swdisaster', () => { for (const m of circle(at, 150)) H(m, D('swdisaster'), 'swdisaster'); fx({ type: 'swboom', x: at.x, y: at.y, r: 160, t: 0.6, col: '#fff2b0' }); R.shake = Math.max(R.shake || 0, 12); G.sfx && G.sfx('boom'); }); }
   // ---------- 여진 ----------
-  const quakeP = () => 0.15 + (G.ojfHas && G.ojfHas('yS4') ? 0.05 : 0);
+  const quakeP = () => 0.15 + (G.ojfHas && G.ojfHas('yS4') ? 0.2 : 0);
   function aftershock(id, run) { const p = P(), sure = p && p.swSureU > now(); if (sure) p.swSureU = 0; if (sure || Math.random() < quakeP()) later(0.6, id, () => { const p = P(); if (!p || p.dead) return; G.float(p.x, p.y - 52, '여진', '#ffe8b0'); run(0.5); }); }
 
   // ---------- 시전 ----------
@@ -11303,23 +11303,23 @@ G.SW.fndInit = (function () {
   const FH = (k) => !!(isS() && G.ojfHas && G.ojfHas(k));
   G.fndReg('seoun', {
     sstar: { n: '성하일격', who: '별을 재던 서운 「누리」가 남긴 셈', tag: 'swstar', ult: '유성우', sub: '星河一擊 — 별은 늦게 떨어질수록 깊이 박힌다', rows: [
-      { l: ['wS1', '별 기술 피해 +15%'], r: ['wS2', '최대 생명력 +10%'], a: ['wA', '두 번 떨어지는 별', '혜성이 떨어진 1초 뒤 같은 자리에 한 번 더(70%)'], b: ['wB', '재는 동안의 별가루', '혜성 · 별똥별을 재는 동안 별가루가 0.5초마다 저절로 나감'] },
-      { l: ['wS3', '천재지변 피해 +25%'], r: ['wS4', '큰 기술 시전 −10%(상한 안)'], a: ['wD', '흩어진 별빛', '별똥별 자리에 작은 별 셋이 남아 1초 뒤 떨어짐'], b: ['wE', '옮겨 가는 점', '점 찍힌 적이 죽으면 점이 가장 가까운 적에게 옮겨 감'] }],
+      { l: ['wS1', '별 기술 피해 +45%'], r: ['wS2', '최대 생명력 +10%'], a: ['wA', '두 번 떨어지는 별', '혜성이 떨어진 1초 뒤 같은 자리에 한 번 더(70%)'], b: ['wB', '재는 동안의 별가루', '혜성 · 별똥별을 재는 동안 별가루가 0.5초마다 저절로 나감'] },
+      { l: ['wS3', '천재지변 피해 +60%'], r: ['wS4', '큰 기술 시전 −10%(상한 안)'], a: ['wD', '흩어진 별빛', '별똥별 자리에 작은 별 셋이 남아 1초 뒤 떨어짐'], b: ['wE', '옮겨 가는 점', '점 찍힌 적이 죽으면 점이 가장 가까운 적에게 옮겨 감'] }],
       cap: ['wU', '하늘이 무너지는 날', '유성우 동안 징조가 5로 찬 채 멈추고, 끝 큰 별 대신 혜성이 떨어짐'] },
     swater: { n: '해일경천', who: '물때를 재던 서운 「해랑」이 남긴 셈', tag: 'swwater', ult: '해일', sub: '海溢驚天 — 물은 물러날 때 가장 많이 끌고 간다', rows: [
-      { l: ['xS1', '물 기술 피해 +15%'], r: ['xS2', '최대 생명력 +10%'], a: ['xA', '두 물때', '썰물이 1초 뒤 한 번 더 당김'], b: ['xB', '깨지는 둑', '밀물 보호막이 깨지면 그 자리에 물기둥'] },
-      { l: ['xS3', '젖은 적에게 피해 +15%'], r: ['xS4', '받는 피해 −8%'], a: ['xD', '두 개의 측우기', '측우를 세우면 내가 선 자리에도 하나 더'], b: ['xE', '물보라 꽃', '젖은 적이 죽을 때 둘레로 물보라, 징조 +1'] }],
+      { l: ['xS1', '물 기술 피해 +60%'], r: ['xS2', '최대 생명력 +10%'], a: ['xA', '두 물때', '썰물이 1초 뒤 한 번 더 당김'], b: ['xB', '깨지는 둑', '밀물 보호막이 깨지면 그 자리에 물기둥'] },
+      { l: ['xS3', '젖은 적에게 피해 +35%'], r: ['xS4', '받는 피해 −8%'], a: ['xD', '두 개의 측우기', '측우를 세우면 내가 선 자리에도 하나 더'], b: ['xE', '물보라 꽃', '젖은 적이 죽을 때 둘레로 물보라, 징조 +1'] }],
       cap: ['xU', '바다가 거꾸로 선다', '해일이 끝에서 되돌아와 한 번 더 쓸고, 돌아오는 물결이 적을 처음 자리로 모음'] },
     swind: { n: '풍운측후', who: '풍기대를 지키던 서운 「바우」가 남긴 셈', tag: 'swwind', ult: '회오리', sub: '風雲測候 — 바람은 재는 이의 옷자락부터 흔든다', rows: [
-      { l: ['yS1', '바람 기술 피해 +15%'], r: ['yS2', '이동 속도 +10%'], a: ['yA', '칼 같은 바람', '칼바람 시전이 없어짐(바로 나감)'], b: ['yB', '바람 탄 셈', '바람 타기 뒤 다음 터뜨리기 기술은 여진이 반드시 남'] },
-      { l: ['yS3', '시전 중 받는 피해 −15%'], r: ['yS4', '여진 확률 +5%p'], a: ['yD', '돌개 겹침', '풍향 재기 동안 실바람이 두 번씩 나감'], b: ['yE', '따르는 막', '바람막이 +2초'] }],
+      { l: ['yS1', '바람 기술 피해 +80%'], r: ['yS2', '이동 속도 +10%'], a: ['yA', '칼 같은 바람', '칼바람 시전이 없어짐(바로 나감)'], b: ['yB', '바람 탄 셈', '바람 타기 뒤 다음 터뜨리기 기술은 여진이 반드시 남'] },
+      { l: ['yS3', '시전 중 받는 피해 −15%'], r: ['yS4', '여진 확률 +20%p'], a: ['yD', '돌개 겹침', '풍향 재기 동안 실바람이 두 번씩 나감'], b: ['yE', '따르는 막', '바람막이 +2초'] }],
       cap: ['yU', '세 바람이 모인다', '회오리가 끝날 때 한데 모여 크게 터짐(모인 적 전부, 회오리 피해 8배)'] },
   });
   // 계산기 · 시험 영웅: 빌드 → 판
   { const b = G.OJ.autoBuild; if (b) G.OJ.autoBuild = function (k) { const r = b.apply(this, arguments); try { const m = { swstar: 'sstar', swwater: 'swater', swwind: 'swind' }[k]; if (m && G.fndOpen && G.fndOpen() && G.ojfAuto) G.ojfAuto(m); } catch (e) {} return r; }; }
   // 수치 칸
-  const TAGK = { wS1: 'swstar', xS1: 'swwater', yS1: 'swwind' };
-  { const b = G.hit; G.hit = function (m, dmg, o) { if (isS() && m && dmg > 0) { const sk = (o && o.sk) || G._sk, s = sk && G.SKILLS[sk]; if (s) { for (const k in TAGK) if (s.tag === TAGK[k] && FH(k)) dmg *= 1.15; if (sk === 'swdisaster' && FH('wS3')) dmg *= 1.25; } if (FH('xS3') && m.swWetU > now()) dmg *= 1.15; } return b.call(this, m, dmg, o); }; }
+  const TAGK = { wS1: 'swstar', xS1: 'swwater', yS1: 'swwind' }; G.SW.FS1 = 1.45;
+  { const b = G.hit; G.hit = function (m, dmg, o) { if (isS() && m && dmg > 0) { const sk = (o && o.sk) || G._sk, s = sk && G.SKILLS[sk]; if (s) { for (const k in TAGK) if (s.tag === TAGK[k] && FH(k)) dmg *= k === 'yS1' ? 1.8 : k === 'xS1' ? 1.6 : G.SW.FS1; if (sk === 'swdisaster' && FH('wS3')) dmg *= 1.6; } if (FH('xS3') && m.swWetU > now()) dmg *= 1.35; } return b.call(this, m, dmg, o); }; }
   { const b = G.heroStats; G.heroStats = function () { const s = b.apply(this, arguments); if (s && (FH('wS2') || FH('xS2'))) s.maxHp = Math.round(s.maxHp * 1.1); return s; }; }
   { const b = G.damagePlayer; G.damagePlayer = function (d, src) { if (isS() && d > 0) { if (FH('xS4')) d *= 0.92; if (FH('yS3') && G.swCasting && G.swCasting()) d *= 0.85; } return b.call(this, d, src); }; }
   { const b = G.recalcGear; G.recalcGear = function () { const r = b.apply(this, arguments); if (G.gx && FH('yS2')) { G.gx.ms += 0.1; if (G.gx._ms0 != null) G.gx._ms0 += 0.1; } return r; }; }
@@ -11428,7 +11428,7 @@ G.CLASSES.seoun.talRender = function (d, tabBar, bindTabs) {
   { const b = T.wet; T.wet = function (m, t) { if (obs() === 'chu') { mark(m); if (obs40('b')) t = Math.max(t || 2, 4); } return b(m, t); }; }
   const wetX = (m, t) => T.wet(m, t);
   // 여진: 말 없는 하늘 30% · 풍향 재기 강화 2-가 +10%p · 서두른 셈이면 없음
-  function shock(id, run) { const p = P(); if (G.swChg('rush')) return; const sure = p && p.swSureU > now(); if (sure) p.swSureU = 0; let q = G.swChg('quiet') ? 0.3 : 0.15; if (G.ojfHas && G.ojfHas('yS4')) q += 0.05; if (p && p.swVaneU > now() && E('swvane', 2, 'a')) q += 0.1;
+  function shock(id, run) { const p = P(); if (G.swChg('rush')) return; const sure = p && p.swSureU > now(); if (sure) p.swSureU = 0; let q = G.swChg('quiet') ? 0.3 : 0.15; if (G.ojfHas && G.ojfHas('yS4')) q += 0.2; if (p && p.swVaneU > now() && E('swvane', 2, 'a')) q += 0.1;
     if (sure || Math.random() < q) later(0.6, id, () => { const p2 = P(); if (!p2 || p2.dead) return; G.float(p2.x, p2.y - 52, '여진', '#ffe8b0'); run(0.5); }); }
 
   // ---------- 기술 (강화 · 변형) ----------
@@ -15123,7 +15123,7 @@ return{svg,RAR};
 (function () {
   const $ = (id) => document.getElementById(id), KEY = 'jeonseung3_seenver';
   // 이번 판에서 바뀐 것 (알림에 보여 줄 몇 줄)
-  G.WHATSNEW = ['<b>0.63.8</b> GitHub Pages 주소에서 「앱으로 설치」가 돼요 — 크롬 메뉴 → 설치하면 주소창 없이 전체 화면으로 열려요(앱 아이콘 잔등, 가칭)', '<b>0.63.7</b> 메뉴 → 「세이브 옮기기」: 내보내기(복사 · 파일) · 가져오기 — 새 주소(GitHub Pages)로 영웅을 그대로 옮길 수 있어요', '<b>0.63.6</b> 새 영웅 기술 포인트가 2로 나오던 것 고침 — 1레벨은 1점', '<b>0.63.5 독</b> — 용독결 「독 기술 피해 +15%」가 지속 피해에도 · 번지는 독은 세기 그대로 둘에게 · 묵은 독 최대 +120% · 용독결을 고르면 독 지속 피해 치명타 확률 +15%p', '<b>0.63.4</b> 1막 · 3막의 눈먼 노인이 다시 말을 해요(조화 창이 대신 뜨던 문제) · 대화를 이어서 몇 마디 더', '<b>0.63.3</b> 서운 점등 19 · 전용 전승 장비 다섯 · 달(삭망 여덟) · 책력 절기 따라 쓰기 · <b>장비 이름 손질</b>: 서운 무기 별자 · 규표 장대 · 윤도 · 별그림, 로브 → 도포 · 장화 → 목화 · 룬 → 새김 등(세기 그대로)', '<b>0.63.2 서운</b> 강화 · 변형 57가지 열림 · <b>책력</b>(절기 고리 · 관측대 셋 · 천기 여섯) · 천재지변은 기본기만으로는 안 터지게(터뜨리기 기술을 배워야, 8초에 한 번)', '<b>0.63.1</b> 새 영웅은 기술 없이 1레벨 포인트 1로 시작 — 「스킬」을 눌러 기본기 셋 중 하나를 골라 찍어요(고른 기술은 1번 칸에) · 서운 기본 이름 <b>휘</b>', '<b>0.63 새 직업 서운</b> — 서서 하늘을 재고 별 · 물 · 바람을 내리침. 걸으면 시전 눈금이 멈춰요 · 점 찍힌 적은 벽 너머로 · 징조 다섯이면 천재지변', '<b>균형</b>: 기술 배율 15줄 · 취권 회피 · 흘려냄 합계 최대 45% · 비침 기본 관통 1 · 아혈침 % 피해 상한 · 등급 이름 <b>일반 · 비범 · 희귀 · 전승</b>', '<b>0.62 조화</b> — 끝 구간 마을에 <b>이름 없는 눈먼 판수</b>. 팔괘(무기 · 균열 30단부터) · 오행(방어구 · 20단부터) · 육합(장신구 · 인장 5단계부터)', '<b>그 판의 기운</b>: 균열 20단부터 징조 하나 + 기운 하나(판수의 점괘 둘 중 고름) · 오행이 맞기운으로 깨어남', '<b>균형 손질</b>: 독 퍼짐 · 해체 바닥(5초) · 취권 → 술병 / 패 → 투전 연계 · 피해 없는 보조 기술은 전역 재사용 대기를 안 씀 · 오작인 경락도는 기술 창 아래로', '<b>0.61.3</b> 기술 창 새 배치 — 같은 레벨은 같은 줄, 칸 아래 고른 강화 · 변형 요약, 누른 기술만 아래로 펼쳐 바로 고르기', '<b>0.61.2</b> 재사용 대기 감소는 다 합쳐 <b>최대 60%</b>(물레 장승만 밖) · 장비 재사용 합 30%, 한 줄 12%(양손 20%) · 전투력이 재사용 감소를 이 빌드에서 실제로 셈 · 기량 카드 이름 외날 · 휩쓸이 · 버팀', '<b>수련 마당</b>: 마을마다 허수아비가 섰어요. 30초 쳐서 <b>단일</b>(이 막 우두머리만 한 하나) 또는 <b>광역</b>(들판 몹만 한 여덟)을 재요', '<b>기량</b> 탭(기술 창): 단일 화력 · 광역 화력 · 버팀, 이 막 우두머리 예상 시간, 단일 ↔ 광역 성향 막대, 기술 몫', '<b>채비</b> 셋(우두머리 · 균열 · 사냥): 기술 · 강화 · 경락 · 시조 판 · 판돈 · 장비를 담아 갈아입기. 새 채비는 지금 낀 장비로 채워져요', '바꾸는 곳: 마을 · 솟대는 늘, 들판은 <b>싸움 밖일 때만</b>(장비 · 기술 · 채비 모두). <b>균열 · 인장 안에서는 잠겨요</b>'];
+  G.WHATSNEW = ['<b>0.63.9 서브 퀘스트</b> — 막마다 한 사람이 다 주던 부탁을 나눴어요. 일과 연있는 사람(수비장 · 행수 · 무녀 · 뱃사공 · 제관 · 주지 …) · 들판의 새 인물 둘(풀려난 학자 · 늙은 봉수꾼) · <b>마을 게시판</b>(1 · 2 · 5 · 6막) · <b>들판에서 주운 쪽지</b>(굴 다섯)로 시작해요. 알릴 사람은 퀘스트 창에', '<b>0.63.9 서운 균열 손질</b> — 시조 판 없이 너무 높던 균열 단을 낮추고, 시조 판(성하일격 · 해일경천 · 풍운측후) 몫을 키움', '<b>0.63.8</b> GitHub Pages 주소에서 「앱으로 설치」가 돼요 — 크롬 메뉴 → 설치하면 주소창 없이 전체 화면으로 열려요(앱 아이콘 잔등, 가칭)', '<b>0.63.7</b> 메뉴 → 「세이브 옮기기」: 내보내기(복사 · 파일) · 가져오기 — 새 주소(GitHub Pages)로 영웅을 그대로 옮길 수 있어요', '<b>0.63.6</b> 새 영웅 기술 포인트가 2로 나오던 것 고침 — 1레벨은 1점', '<b>0.63.5 독</b> — 용독결 「독 기술 피해 +15%」가 지속 피해에도 · 번지는 독은 세기 그대로 둘에게 · 묵은 독 최대 +120% · 용독결을 고르면 독 지속 피해 치명타 확률 +15%p', '<b>0.63.4</b> 1막 · 3막의 눈먼 노인이 다시 말을 해요(조화 창이 대신 뜨던 문제) · 대화를 이어서 몇 마디 더', '<b>0.63.3</b> 서운 점등 19 · 전용 전승 장비 다섯 · 달(삭망 여덟) · 책력 절기 따라 쓰기 · <b>장비 이름 손질</b>: 서운 무기 별자 · 규표 장대 · 윤도 · 별그림, 로브 → 도포 · 장화 → 목화 · 룬 → 새김 등(세기 그대로)', '<b>0.63.2 서운</b> 강화 · 변형 57가지 열림 · <b>책력</b>(절기 고리 · 관측대 셋 · 천기 여섯) · 천재지변은 기본기만으로는 안 터지게(터뜨리기 기술을 배워야, 8초에 한 번)', '<b>0.63.1</b> 새 영웅은 기술 없이 1레벨 포인트 1로 시작 — 「스킬」을 눌러 기본기 셋 중 하나를 골라 찍어요(고른 기술은 1번 칸에) · 서운 기본 이름 <b>휘</b>', '<b>0.63 새 직업 서운</b> — 서서 하늘을 재고 별 · 물 · 바람을 내리침. 걸으면 시전 눈금이 멈춰요 · 점 찍힌 적은 벽 너머로 · 징조 다섯이면 천재지변', '<b>균형</b>: 기술 배율 15줄 · 취권 회피 · 흘려냄 합계 최대 45% · 비침 기본 관통 1 · 아혈침 % 피해 상한 · 등급 이름 <b>일반 · 비범 · 희귀 · 전승</b>', '<b>0.62 조화</b> — 끝 구간 마을에 <b>이름 없는 눈먼 판수</b>. 팔괘(무기 · 균열 30단부터) · 오행(방어구 · 20단부터) · 육합(장신구 · 인장 5단계부터)', '<b>그 판의 기운</b>: 균열 20단부터 징조 하나 + 기운 하나(판수의 점괘 둘 중 고름) · 오행이 맞기운으로 깨어남', '<b>균형 손질</b>: 독 퍼짐 · 해체 바닥(5초) · 취권 → 술병 / 패 → 투전 연계 · 피해 없는 보조 기술은 전역 재사용 대기를 안 씀 · 오작인 경락도는 기술 창 아래로', '<b>0.61.3</b> 기술 창 새 배치 — 같은 레벨은 같은 줄, 칸 아래 고른 강화 · 변형 요약, 누른 기술만 아래로 펼쳐 바로 고르기', '<b>0.61.2</b> 재사용 대기 감소는 다 합쳐 <b>최대 60%</b>(물레 장승만 밖) · 장비 재사용 합 30%, 한 줄 12%(양손 20%) · 전투력이 재사용 감소를 이 빌드에서 실제로 셈 · 기량 카드 이름 외날 · 휩쓸이 · 버팀', '<b>수련 마당</b>: 마을마다 허수아비가 섰어요. 30초 쳐서 <b>단일</b>(이 막 우두머리만 한 하나) 또는 <b>광역</b>(들판 몹만 한 여덟)을 재요', '<b>기량</b> 탭(기술 창): 단일 화력 · 광역 화력 · 버팀, 이 막 우두머리 예상 시간, 단일 ↔ 광역 성향 막대, 기술 몫', '<b>채비</b> 셋(우두머리 · 균열 · 사냥): 기술 · 강화 · 경락 · 시조 판 · 판돈 · 장비를 담아 갈아입기. 새 채비는 지금 낀 장비로 채워져요', '바꾸는 곳: 마을 · 솟대는 늘, 들판은 <b>싸움 밖일 때만</b>(장비 · 기술 · 채비 모두). <b>균열 · 인장 안에서는 잠겨요</b>'];
   const baseStart = G.start;
   G.start = function () {
     const r = baseStart.apply(this, arguments);
@@ -17803,26 +17803,37 @@ return{svg,RAR};
   }
 
   // ---------- 마을 NPC ----------
+  // 0.63.9 주는 사람 · 알릴 사람을 퀘스트마다(d.giver · d.to). 없으면 막의 일 NPC(옛 방식). giver 'board' · 'note'는 6t_subq2
   function addNpc(z) { const d = G.SUB_NPC[z.id]; if (!d || z.npcs.some((n) => n.id === d[0])) return; const f = z.pois.fire || z.entries.start; z.npcs.push({ id: d[0], name: d[1], rig: d[2], x: f.x + d[3], y: f.y + d[4] }); }
-  const npcAct = (id) => { for (const zid in G.SUB_NPC) if (G.SUB_NPC[zid][0] === id) return G.ZONES[zid].act; return 0; };
+  const actNpc = (act) => { const t = G.ACTS[act] && G.ACTS[act].town; return t && G.SUB_NPC[t] ? G.SUB_NPC[t][0] : ''; };
+  const giv = (q) => Q[q].giver || actNpc(Q[q].act), rep = (q) => Q[q].to && Q[q].type !== 'deliver' ? Q[q].to : (Q[q].giver && Q[q].giver !== 'board' && Q[q].giver !== 'note' ? Q[q].giver : actNpc(Q[q].act));
+  let NAMES = null;
+  const nameOf = (id) => { if (!NAMES) { NAMES = {}; for (const zid in G.ZONES) for (const n of G.ZONES[zid].npcs || []) if (Array.isArray(n)) NAMES[n[0]] = n[1]; for (const z in G.SUB_NPC) NAMES[G.SUB_NPC[z][0]] = G.SUB_NPC[z][1]; for (const z in G.SUBF || {}) NAMES[G.SUBF[z][0]] = G.SUBF[z][1]; } return NAMES[id] || id; };
+  const repName = (q) => nameOf(rep(q));
+  const pure = (id) => Object.values(G.SUB_NPC).some((d) => d[0] === id) || Object.values(G.SUBF || {}).some((d) => d[0] === id);
+  const isSubNpc = (id) => pure(id) || Object.keys(Q).some((q) => giv(q) === id || rep(q) === id);
   { const b = G.npcHasQuest; G.npcHasQuest = function (id) {
-    if (!G.S) return b ? b(id) : false; const act = npcAct(id);
-    if (act) { const L = actQ(act).filter(avail); if (L.some((q) => st(q) === 2)) return '!'; if (L.some((q) => st(q) === 0)) return '◇'; return false; }
+    if (!G.S) return b ? b(id) : false;
     for (const q in Q) if (Q[q].type === 'deliver' && Q[q].to === id && st(q) === 1) return '!';
+    if (isSubNpc(id)) { const K = Object.keys(Q).filter(avail); if (K.some((q) => rep(q) === id && st(q) === 2)) return '!'; const bq = b ? b(id) : false; if (bq) return bq; if (K.some((q) => giv(q) === id && st(q) === 0)) return '◇'; return false; }
     return b ? b(id) : false; }; }
   { const b = G.talk; G.talk = function (id) {
     for (const q in Q) { const d = Q[q]; if (d.type === 'deliver' && d.to === id && st(q) === 1) { reward(q); return G.dialog(d.toName, d.done); } }
-    const act = npcAct(id); if (!act) return b.apply(this, arguments);
-    const name = G.SUB_NPC[Object.keys(G.SUB_NPC).find((z) => G.SUB_NPC[z][0] === id)][1], L = actQ(act), btn = [];
-    for (const q of L) { const d = Q[q], s = st(q);
-      if (s === 2) btn.push(['! ' + d.name + ' — 알리기', () => { reward(q); G.dialog(name, d.done); }]);
-      else if (s === 1) btn.push(['· ' + d.name + ' (진행 중)', () => G.dialog(name, d.goal)]);
-      else if (s === 0 && avail(q)) btn.push(['◇ ' + d.name, () => { set(q, { st: 1, got: [] }); G.dialog(name, d.intro + `<br><br><span class="hint">${d.goal}</span>`); G.toast && G.toast('서브 퀘스트: ' + d.name, GOLD); }]);
+    if (!isSubNpc(id)) return b.apply(this, arguments);
+    const name = nameOf(id), btn = [];
+    for (const q in Q) { const d = Q[q], s = st(q);
+      if (s === 2 && rep(q) === id) btn.push(['! ' + d.name + ' — 알리기', () => { reward(q); G.dialog(name, d.done); }]);
+      else if (s === 1 && giv(q) === id) btn.push(['· ' + d.name + ' (진행 중)', () => G.dialog(name, d.goal)]);
+      else if (s === 0 && giv(q) === id && avail(q)) btn.push(['◇ ' + d.name, () => { set(q, { st: 1, got: [] }); G.dialog(name, d.intro + `<br><br><span class="hint">${d.goal}</span>`); G.toast && G.toast('서브 퀘스트: ' + d.name, GOLD); }]);
     }
-    const left = L.filter((q) => st(q) === 0 && !avail(q)).length, all = !btn.length;
+    if (!pure(id)) { if (!btn.length) return b.apply(this, arguments); btn.push(['다른 이야기', () => b.call(this, id)]); btn.push(['나중에', null]); return G.dialog(name, (G.SUBG_HI && G.SUBG_HI[id]) || '자네, 잠깐 시간 있나?', btn); }
+    const mine = Object.keys(Q).filter((q) => giv(q) === id), left = mine.filter((q) => st(q) === 0 && !avail(q)).length, all = !btn.length;
+    const hi = (G.SUBF_HI && G.SUBF_HI[id]) || G.SUB_HI[npcActOf(id)] || '';
     btn.push(['나중에', null]);
-    G.dialog(name, G.SUB_HI[act] + (all ? '<br><br>' + (left ? '물소리포로 가는 뱃길이 열리면 부탁할 일이 하나 더 있소.' : '부탁한 일은 다 끝났어요. 고마워요.') : ''), btn);
+    G.dialog(name, hi + (all ? '<br><br>' + (left ? '물소리포로 가는 뱃길이 열리면 부탁할 일이 하나 더 있소.' : '부탁한 일은 다 끝났어요. 고마워요.') : ''), btn);
   }; }
+  const npcActOf = (id) => { for (const zid in G.SUB_NPC) if (G.SUB_NPC[zid][0] === id) return G.ZONES[zid].act; return 0; };
+  G.subGiv = giv; G.subRep = rep; G.subRepName = repName; G.subNameOf = nameOf; G.subReward = reward; G.subAvail = avail;
 
   // ---------- 구역에 들어갈 때: 물건 · 이름 붙은 적 · 발굴 현장 ----------
   function setup(z) {
@@ -17842,7 +17853,7 @@ return{svg,RAR};
   }
   { const b = G.enterZone; G.enterZone = function () { const r = b.apply(this, arguments); try { setup(R.zone); } catch (e) { console.warn('sub', e); } return r; }; }
   { const b = G.onKill; G.onKill = function (m) { if (b) b.apply(this, arguments); const z = R.zone;
-    if (m.subq && st(m.subq) === 1) { set(m.subq, { st: 2 }); if (z) z.subMark = null; const d = Q[m.subq]; G.banner && G.banner(d.mname + ' 처치', 1.6); G.toast && G.toast(`${d.name}: 목표 완료 — ${G.SUB_NPC[G.ACTS[d.act].town][1]}에게 알리세요`, GOLD); }
+    if (m.subq && st(m.subq) === 1) { set(m.subq, { st: 2 }); if (z) z.subMark = null; const d = Q[m.subq]; G.banner && G.banner(d.mname + ' 처치', 1.6); G.toast && G.toast(`${d.name}: 목표 완료 — ${repName(m.subq)}에게 알리세요`, GOLD); }
     if (m.stolen) { const p = P(); if (p) { p[m.stolen.k] = m.stolen.t; G.toast && G.toast('빼앗긴 가호를 되찾았어요', '#9fd8ff'); } m.stolen = null; }
     if (m.dig && z && z.dig && !z.dig.done) { z.dig.n--; if (z.dig.n <= 0) { z.dig.done = true; R.chests.push({ x: z.dig.x + 46, y: z.dig.y + 10, hidden: false, gold: true, open: false, seen: true, a: 1 }); G.toast && G.toast('발굴 현장을 되찾았어요 — 도굴꾼이 모은 상자가 남았어요', GOLD); R.fx.push({ type: 'ring', x: z.dig.x, y: z.dig.y, r: 10, maxR: 160, t: 0.6, max: 0.6, color: GOLD }); } }
   }; }
@@ -17868,7 +17879,7 @@ return{svg,RAR};
     const r = baseUpd.apply(this, arguments); const p = P(), z = R.zone; if (!p || !z || (G.paused && G.paused())) return r;
     if (z.subItems && !p.dead) for (const it of z.subItems) { if (it.gone || Math.hypot(p.x - it.x, p.y - it.y) > 40) continue; it.gone = true; const s = ST(it.q), d = Q[it.q]; if (!s || s.st !== 1) continue;
       if (!s.got.includes(it.i)) s.got.push(it.i); G.float(p.x, p.y - 50, `${d.item} ${s.got.length}/${d.n}`, GOLD, true); G.part(it.x, it.y - 8, GOLD, 16, 140, 0.6, 3);
-      if (s.got.length >= d.n) { set(it.q, { st: 2 }); G.toast && G.toast(`${d.name}: 다 찾았어요 — ${G.SUB_NPC[G.ACTS[d.act].town][1]}에게 알리세요`, GOLD); } else set(it.q, {}); }
+      if (s.got.length >= d.n) { set(it.q, { st: 2 }); G.toast && G.toast(`${d.name}: 다 찾았어요 — ${repName(it.q)}에게 알리세요`, GOLD); } else set(it.q, {}); }
     for (const m of R.mobs) if (m.hp > 0 && m.aggro && (m.type === 'digger' || m.type === 'rhunter' || m.type === 'chief')) mobAI(m, p, dt);
     return r;
   };
@@ -17892,7 +17903,7 @@ return{svg,RAR};
   { const b = G.extraLights; G.extraLights = function (hole) { if (b) b(hole); const z = R.zone; if (z && z.subItems) for (const it of z.subItems) if (!it.gone) hole(it.x, it.y - 6, 60, 0.35); }; }
   // 퀘스트 표시에 서브 퀘스트 줄
   { const b = G.refreshQuests; G.refreshQuests = function () { b.apply(this, arguments); const box = document.getElementById('questBox'), S = G.S; if (!box || !S || !R.zone) return; let h = '';
-    for (const q in Q) { const s = st(q); if (s !== 1 && s !== 2) continue; const d = Q[q], n = d.type === 'fetch' ? ` (${(ST(q).got || []).length}/${d.n})` : ''; h += `<div class="q sub"><b>◇ ${d.name}${n}</b><span>${s === 2 ? G.SUB_NPC[G.ACTS[d.act].town][1] + '에게 알리세요' : d.goal}</span></div>`; }
+    for (const q in Q) { const s = st(q); if (s !== 1 && s !== 2) continue; const d = Q[q], n = d.type === 'fetch' ? ` (${(ST(q).got || []).length}/${d.n})` : ''; h += `<div class="q sub"><b>◇ ${d.name}${n}</b><span>${s === 2 ? repName(q) + '에게 알리세요' : d.goal}</span></div>`; }
     if (h) box.insertAdjacentHTML('beforeend', h); }; }
   G.subState = st; G.subSet = set;
 })();
@@ -18163,7 +18174,7 @@ return{svg,RAR};
     S.caves = S.caves || {}; const first = !S.caves[z.id]; S.caves[z.id] = (S.caves[z.id] || 0) + 1;
     R.chests.push({ x: m.x + 40, y: m.y + 10, hidden: false, gold: true, open: false, seen: true, a: 1 });
     G.banner && G.banner(m.d.name + ' 처치', 1.6);
-    const q = qOf(z.id); if (q && G.subState && G.subState(q) < 2) { const d = G.SUBQ[q]; G.subSet(q, { st: 2 }); G.toast && G.toast(`${d.name}: 목표 완료 — ${G.SUB_NPC[G.ACTS[d.act].town][1]}에게 알리세요`, GOLD); }
+    const q = qOf(z.id); if (q && G.subState && G.subState(q) < 2) { const d = G.SUBQ[q]; G.subSet(q, { st: 2 }); G.toast && G.toast(`${d.name}: 목표 완료 — ${G.subRepName ? G.subRepName(q) : G.SUB_NPC[G.ACTS[d.act].town][1]}에게 알리세요`, GOLD); }
     else G.toast && G.toast('굴 임자가 쓰러졌어요 — 상자가 남았어요', GOLD);
   }; }
   // 굴 임자 머리 위 표시 · 미니맵
@@ -19898,6 +19909,146 @@ if (G.SW && G.SW.fndInit) { G.SW.fndInit(); G.SW.fndInit = null; }
     if (!/github\.io$/.test(location.hostname)) return;
     window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
   } catch (e) {}
+})();
+// ===== 0.63.9 서브 퀘스트 나누기 (진오 결정 1+3) =====
+// 막마다 한 사람이 다 주던 것을: ① 일과 연있는 사람(마을 · 들판 새 인물)이 주고 ③ 마을 게시판 · 들판에서 주운 쪽지로도 시작.
+// giver: NPC id | 'board'(마을 게시판) | 'note'(들판 쪽지, noteZone) · to: 알릴 사람(게시판 · 쪽지는 꼭)
+(function () {
+  const R = G.R, P = () => R.player, Q = G.SUBQ, GOLD = '#ffd34a';
+  const st = (q) => (G.subState ? G.subState(q) : 0), set = (q, o) => G.subSet && G.subSet(q, o);
+  function rng(seed) { let a = seed >>> 0; return () => { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  function hash(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+
+  // ---------- 들판 새 인물 (가칭) ----------
+  G.SUBF = {
+    canyon: ['subf2', '풀려난 학자 갈음', 'arcane'],
+    beacon: ['subf4', '늙은 봉수꾼 덕쇠', 'warrior'],
+  };
+  G.SUBF_HI = {
+    subf2: '전승원에서 왔소. …아니, 도굴꾼한테 붙들렸다 겨우 풀려난 사람이라 해야 맞겠지.',
+    subf4: '봉수대를 지키던 늙은이요. 불은 꺼졌어도 자리는 못 떠나겠더군.',
+  };
+  // 마을 사람이 서브 퀘스트를 줄 때 첫마디
+  G.SUBG_HI = {
+    captain: '자네, 잠깐. 성 밖 일로 부탁할 게 하나 있네.',
+    hadin: '모래길을 다니는 사람끼리 하는 부탁이오. 들어 보겠소?',
+    lia: '사당 일로 걱정이 하나 있어요. 들어 주실래요?',
+    orben: '배 일 하는 사람 부탁 하나 들어 주게.',
+    elin: '타고 남은 것들 가운데 아직 읽을 수 있는 게 있을 겁니다.',
+    sub4: '불 앞에 오래 서 있으면 알게 되지. 뭐가 타고 뭐가 남는지.',
+    bran: '탑 일로 시주 대신 부탁 하나 드리겠소.',
+    tide6: '물때를 재다 보면 별 걸 다 보지. 부탁 하나 하세.',
+  };
+
+  // ---------- 누가 주고 누구에게 알리나 ----------
+  const A = (q, o) => { if (Q[q]) Object.assign(Q[q], o); };
+  // 1막: 다솜(표지 조각 · 일지 전하기) · 수비장(정찰병) · 게시판(숯가마) · 쪽지(숯쟁이 굴 → 수비장)
+  A('s1b', { giver: 'captain',
+    intro: '삼백 해 전, 고개 아래를 살피러 내려간 정찰병이 꼭 하나 있었네. 우리 수비군 사람이야. 돌아오지 못했지. 지금도 <b>까마귀 고개</b>를 돈다는 말이 있어. 쉬게 해 주고, <b>표식패</b>를 가져다주게. 이 성 문서에 그 이름을 다시 올리겠네.',
+    done: '표식패에 이름이 남아 있군. 내려간 사람이 있었다는 것만으로도 이 산성의 기록은 달라지네. 고맙네.' });
+  A('s1m', { giver: 'board', to: 'sub1',
+    intro: '<b>솔티 고개</b> 숯막의 <b>숯섬 꼬리표</b>를 찾아 주실 분. 꼬리표마다 숯을 구운 사람 이름이 적혀 있습니다. 고개가 막힌 뒤로 아무도 내려오지 않았어요. 누가 불을 땠는지는 적어 둬야 하니까요. — 전승원 서기 다솜' });
+  A('s1n', { giver: 'note', noteZone: 'soltae', to: 'captain', noteT: '숯 묻은 쪽지',
+    intro: '“굴에 재어 둔 숯을 못 꺼내겠소. 밤마다 숯검정 뒤집어쓴 큰 것이 기어 나와. 덕보도 막쇠도 안 돌아왔소. 이 쪽지를 주운 이는 <b>새벽산성 수비장</b>께 알려 주시오. 고개 구석 <b>숯쟁이 굴</b>이오. — 숯막 사람”',
+    done: '숯쟁이 굴이 비었다고? 숯 굽던 사람들이 그 꼴이 된 건지도 모르겠군. …그래도 그 숯이면 올겨울 성벽 화로는 안 꺼지겠네. 고맙네.' });
+  // 2막: 무늬(왕릉) · 행수 하담(샘터 물통) · 들판 학자(쪽지) · 게시판(강바닥 임자) · 쪽지(도굴꾼 굴 → 하담)
+  A('s2b', { giver: 'hadin' });
+  A('s2c', { giver: 'subf2',
+    intro: '골짜기를 지나다 거둠회 도굴꾼에게 붙들렸소. 겨우 풀려나긴 했는데, 저들이 모으는 걸 적어 둔 <b>쪽지</b>를 이 <b>뙤약볕 골짜기</b> 어딘가에 떨어뜨렸지 뭐요. 다리가 이래서 찾으러 갈 수가 없구려. 좀 찾아 주시오.',
+    done: '이거요, 이거. “저들은 각인을 훔치는 게 아니라 구한다고 믿는다.” …그래서 더 골치 아픈 게요. 전승원에 꼭 알리겠소. 고맙소.' });
+  A('s2m', { giver: 'board', to: 'sub2',
+    intro: '<b>마른 강바닥</b> 아래서 꿈틀대는 큰 놈을 치워 줄 이를 찾소. 물이 마른 게 아니라 그놈이 물길을 틀어막고 있다는 말이 있소. 물이 돌아올지는 모르오. 그래도 해 봐야지. — 옥패 장인 무늬' });
+  A('s2n', { giver: 'note', noteZone: 'drybed', to: 'hadin', noteT: '도굴꾼의 쪽지',
+    intro: '“파낸 것은 다 <b>강바닥 굴</b>에 쌓아 둘 것. 굴지기 <b>삽날</b>이 셈한다. 옥패는 따로. 임자 이름이 새겨진 것은 값이 곱이다.” …거둠회 도굴꾼이 흘린 쪽지예요. <b>바람우물 행수</b>라면 이 굴 이야기를 반길 거예요.',
+    done: '도굴꾼 굴을 털었다고? 옥패가 섞여 있구려. 임자 이름이 새겨진 것들이오. 무늬에게 맡겨 하나하나 돌려보내겠소. 훔친 것을 되찾는 건 도둑질이 아니오.' });
+  // 3막: 버들(등불 바구니) · 무녀 아리(사당 도둑) · 뱃사공 오름(노) · 쪽지(뱃사람 무덤 → 오름)
+  A('s3b', { giver: 'lia',
+    intro: '<b>가라앉은 사당 터</b>에 거둠회 도둑이 들었어요. 사당에 모셔 둔 유품 조각을 긁어 간대요. 손이 빨라서 몸에 붙은 <b>가호</b>까지 채 간다니 조심하세요. 그 사당은 제가 돌보던 곳이에요.',
+    done: '되찾아 오셨군요. 저들도 사정이 있겠지요. 하지만 남이 내려놓은 걸 주워 간다고 제 것이 되지는 않아요. 다시 모셔 둘게요.' });
+  A('s3m', { giver: 'orben' });
+  A('s3n', { giver: 'note', noteZone: 'reedway', to: 'orben', noteT: '젖은 쪽지',
+    intro: '“도사공 어른이 일어나셨다. 물길 옆 <b>뱃사람 무덤</b>에서 넋들을 도로 물로 끌고 가신다. 우리는 무서워 못 간다. 이걸 보는 이는 <b>갈대나루 뱃사공</b>에게 일러 주오.”',
+    done: '도사공 어른을 쉬게 해 드렸다고? 그 양반, 살아서는 한 사람도 물에 안 빠뜨렸다던데. 죽어서 그 꼴이 되다니. 사공은 노를 놓아야 쉬는 법이야. 고맙네.' });
+  // 4막: 쇠돌(화로지기) · 제관 이랑(편지) · 들판 봉수꾼(봉수 일지) · 쪽지(곳간 → 쇠돌)
+  A('s4b', { giver: 'elin',
+    intro: '<b>불탄 들</b>에 마을 터가 있습니다. 잿더미 속에 <b>편지</b>가 남았을 겁니다. 다들 누구를 탓했는지만 기억하지, 그때 무슨 말이 오갔는지는 아무도 모르지요. 찾아 주시면 제단에서 읽겠습니다.',
+    done: '“미워서가 아니라 무서워서 못 갔다. 미안하다.” …삼백 해 동안 이 한 줄을 아무도 읽지 않았군요. 오늘 저녁 제단에서 소리 내어 읽겠습니다.' });
+  A('s4m', { giver: 'subf4',
+    intro: '이 <b>봉수대</b>가 무너지던 날, 봉화가 몇 번 올랐는지 나도 모르오. 그날 나는 아래 마을에 내려가 있었거든. 한 번이면 적이 보인다는 거고, 다섯 번이면 다 끝났다는 거요. 같이 서던 이들이 적던 <b>일지</b>가 이 근처에 흩어져 있을 거요. 찾아 주시오.',
+    done: '…다섯 번이 아니오. 네 번 올리고 멈췄구려. 다섯째 불을 안 붙인 거요. 끝났다고는 안 알린 거지. 그럼 나도 아직 이 자리를 지켜야겠구려.' });
+  A('s4n', { giver: 'note', noteZone: 'beacon', to: 'sub4', noteT: '그을린 쪽지',
+    intro: '“봉수대 밑 <b>잿더미 곳간</b> 땅 밑 칸은 안 탔다. 곳간지기 <b>잿손</b>이 타 죽고도 문 앞을 안 떠난다. 안에 쇠가 남았다. 이걸 주운 이는 <b>마지막 성 대장장이</b>에게 가져가라.”' });
+  // 5막: 종지기(이름패 · 이든에게) · 주지 설담(천루 도굴단) · 게시판(얼음 밑의 종) · 쪽지(별지기 움막 → 설담)
+  A('s5b', { giver: 'bran' });
+  A('s5m', { giver: 'board', to: 'sub5',
+    intro: '암자의 둘째 종이 눈사태에 쓸려 <b>얼어붙은 못</b>에 빠졌소. 못가에 큰 설인이 자리를 잡아 다가갈 수가 없구려. 그놈을 물리쳐 줄 이를 찾소. 종은 못 건져도 소리는 들어 보고 싶소. — 종지기' });
+  A('s5n', { giver: 'note', noteZone: 'icepond', to: 'bran', noteT: '얼어붙은 쪽지',
+    intro: '“고리가 하늘과 어긋났다. 오늘도 별자리를 고쳐 적는다. 못가 <b>별지기 움막</b>에서.” …끝에 덧붙인 글씨가 떨린다. “누가 이걸 보거든 <b>눈마루 암자 주지</b>께 내가 아직 있다고 전해 주오.”',
+    done: '“고리가 별을 따르지 않고, 별이 고리를 따른다.” …마지막 줄이 이렇구려. 무슨 뜻인지는 탑에 올라가 보면 알겠지. 그이 이름은 내가 불경 끝에 적어 두겠소. 조심하시오.' });
+  // 6막: 모래(닻고리) · 게시판(소금 굴, 모래 글씨)
+  A('s6n', { giver: 'board', to: 'sub6',
+    intro: '<b>소금꽃 벌</b> 구석 굴에 사공들 우두머리가 소금이 되어 서 있대요. 밤마다 굴 밖으로 나와 마을 쪽을 본대요. 무서워서 아무도 못 가요. 쉬게 해 줄 사람 찾아요. — 모래 (글씨가 삐뚤빼뚤하다)' });
+
+  // ---------- 게시판 ----------
+  const BOARD = { town: '새벽산성 게시판', town2: '바람우물 게시판', town5: '눈마루 암자 게시판', town6: '물때마을 게시판' };
+  const boardQ = (z) => Object.keys(Q).filter((q) => Q[q].giver === 'board' && G.ACTS[Q[q].act] && G.ACTS[Q[q].act].town === z.id);
+  const freeNear = (z, x0, y0) => { for (let k = 0; k < 40; k++) { const a = k * 0.8, d = k * 7, x = x0 + Math.cos(a) * d, y = y0 + Math.sin(a) * d; if (!G.blocked(z, x, y, 22)) return { x, y }; } return { x: x0, y: y0 }; };
+  function boardMark(z) { const L = boardQ(z).filter((q) => G.subAvail(q)); if (L.some((q) => st(q) === 0)) return '◇'; return ''; }
+  function openBoard() {
+    const z = R.zone; if (!z) return; const L = boardQ(z), btn = [];
+    for (const q of L) { const d = Q[q], s = st(q);
+      if (s === 0 && G.subAvail(q)) btn.push(['◇ ' + d.name, () => { set(q, { st: 1, got: [] }); G.dialog(BOARD[z.id], d.intro + `<br><br><span class="hint">${d.goal}<br>끝내면 ${G.subRepName(q)}에게 알리세요.</span>`); G.toast && G.toast('서브 퀘스트: ' + d.name, GOLD); G.sfx && G.sfx('click'); }]);
+      else if (s === 1 || s === 2) btn.push(['· ' + d.name + (s === 2 ? ' — ' + G.subRepName(q) + '에게 알리기' : ' (진행 중)'), () => G.dialog(BOARD[z.id], d.intro + `<br><br><span class="hint">${s === 2 ? G.subRepName(q) + '에게 알리세요.' : d.goal}</span>`)]); }
+    btn.push(['닫기', null]);
+    G.dialog(BOARD[z.id], btn.length > 1 && L.some((q) => st(q) < 3) ? '빛바랜 종이 몇 장이 붙어 있다.' : '붙은 글은 다 떼어졌다. 누군가 「고맙소」라고 적어 두었다.', btn);
+  }
+  // ---------- 들판 쪽지 ----------
+  const noteQ = (zid) => Object.keys(Q).filter((q) => Q[q].giver === 'note' && Q[q].noteZone === zid);
+  function readNote(n) { const q = n.q, d = Q[q]; n.gone = true; if (st(q) !== 0) return;
+    set(q, { st: 1, got: [] }); G.dialog(d.noteT || '주운 쪽지', d.intro + `<br><br><span class="hint">${d.goal}<br>끝내면 ${G.subRepName(q)}에게 알리세요.</span>`);
+    G.toast && G.toast('서브 퀘스트: ' + d.name + ' (쪽지)', GOLD); G.part(n.x, n.y - 8, GOLD, 16, 140, 0.6, 3); G.sfx && G.sfx('click'); }
+
+  function setup(z) {
+    if (!z || !z.def) return;
+    if (BOARD[z.id] && !z.subBoard && boardQ(z).length) { const f = (z.pois && z.pois.fire) || z.entries.start; z.subBoard = freeNear(z, f.x - 150, f.y + 70); }
+    const fd = G.SUBF[z.id]; if (fd && z.npcs && !z.npcs.some((n) => n.id === fd[0])) { const e = z.entries.start || Object.values(z.entries)[0] || z.wp; if (e) { const pt = freeNear(z, e.x + 90, e.y - 50); z.npcs.push({ id: fd[0], name: fd[1], rig: fd[2], x: pt.x, y: pt.y }); } }
+    const NQ = noteQ(z.id); if (NQ.length) { z.subNotes = z.subNotes || [];
+      for (const q of NQ) { if (st(q) !== 0 || z.subNotes.some((n) => n.q === q)) continue; const rnd = rng(hash(z.id + ':note:' + q + ':' + (z.seedX || 0)));
+        const avoid = Object.values(z.entries).concat(z.wp ? [z.wp] : [], z.npcs || []), boss = z.pois && z.pois.bossRoom; let pt = null;
+        for (const md of [380, 260, 160]) { for (let i = 0; i < 14 && !pt; i++) { const c = G.randomFloor(z, rnd, avoid, md); if (c && !(boss && Math.hypot(c.x - boss.cx, c.y - boss.cy) < 300)) pt = c; } if (pt) break; }
+        if (pt) z.subNotes.push({ q, x: pt.x, y: pt.y, ph: rnd() * 6 }); } }
+  }
+  { const b = G.enterZone; G.enterZone = function () { const r = b.apply(this, arguments); try { setup(R.zone); } catch (e) { console.warn('subq2', e); } return r; }; }
+  { const b = G.nearAction; G.nearAction = function () { const z = R.zone, p = P();
+    if (z && p && !p.dead && z.subBoard && Math.hypot(z.subBoard.x - p.x, z.subBoard.y - p.y) < 70) return { label: '게시판 보기', fn: openBoard };
+    return b.apply(this, arguments); }; }
+  { const b = G.update; G.update = function (dt) { const r = b.apply(this, arguments); const p = P(), z = R.zone; if (!p || !z || p.dead || !z.subNotes || (G.paused && G.paused())) return r;
+    for (const n of z.subNotes) if (!n.gone && Math.hypot(p.x - n.x, p.y - n.y) < 40) { readNote(n); break; }
+    return r; }; }
+
+  // ---------- 그리기 ----------
+  { const b = G.drawEnv; G.drawEnv = function (cx) { if (b) b.apply(this, arguments); const z = R.zone; if (!z) return; const t = R.time;
+    const bd = z.subBoard; if (bd) { const x = bd.x, y = bd.y;
+      cx.fillStyle = 'rgba(0,0,0,0.35)'; cx.beginPath(); cx.ellipse(x, y + 12, 26, 7, 0, 0, 7); cx.fill();
+      cx.fillStyle = '#3a2614'; cx.fillRect(x - 22, y - 34, 5, 46); cx.fillRect(x + 17, y - 34, 5, 46);
+      cx.fillStyle = '#6a4a2a'; cx.fillRect(x - 28, y - 46, 56, 28); cx.fillStyle = '#4a3018'; cx.fillRect(x - 30, y - 50, 60, 5);
+      const pap = [[-22, -42, 14, 18, '#e8dcc0'], [-5, -43, 12, 14, '#d8ccae'], [10, -41, 13, 17, '#efe4ca']]; for (const [dx, dy, w, h, c] of pap) { cx.fillStyle = c; cx.fillRect(x + dx, y + dy, w, h); cx.fillStyle = 'rgba(60,40,20,.5)'; cx.fillRect(x + dx + 2, y + dy + 4, w - 4, 1.2); cx.fillRect(x + dx + 2, y + dy + 8, w - 6, 1.2); }
+      const mk = boardMark(z); if (mk) { cx.fillStyle = GOLD; cx.font = '900 20px sans-serif'; cx.textAlign = 'center'; cx.fillText(mk, x, y - 62 + Math.sin(t * 4) * 2); } }
+    if (z.subNotes) for (const n of z.subNotes) { if (n.gone) continue; const y = n.y - 4 + Math.sin(t * 2.2 + n.ph) * 2;
+      cx.save(); cx.globalCompositeOperation = 'lighter'; const g = cx.createRadialGradient(n.x, y, 0, n.x, y, 30); g.addColorStop(0, 'rgba(240,230,190,0.45)'); g.addColorStop(1, 'rgba(240,230,190,0)'); cx.fillStyle = g; cx.beginPath(); cx.arc(n.x, y, 30, 0, 7); cx.fill(); cx.restore();
+      cx.save(); cx.translate(n.x, y); cx.rotate(-0.25); cx.fillStyle = '#e6dbbf'; cx.fillRect(-9, -6, 18, 12); cx.fillStyle = '#b8a880'; cx.fillRect(-10, -7, 3, 14); cx.fillRect(7, -7, 3, 14); cx.fillStyle = 'rgba(60,40,20,.6)'; cx.fillRect(-5, -3, 10, 1.2); cx.fillRect(-5, 1, 7, 1.2); cx.restore();
+      cx.fillStyle = GOLD; cx.font = '900 13px sans-serif'; cx.textAlign = 'center'; cx.fillText('◇', n.x, y - 16 + Math.sin(t * 4) * 1.5); }
+  }; }
+  { const b = G.envMini; G.envMini = function (dot) { if (b) b(dot); const z = R.zone; if (!z) return; if (z.subBoard && boardMark(z)) dot(z.subBoard.x, z.subBoard.y, GOLD, 2.4); if (z.subNotes) for (const n of z.subNotes) if (!n.gone) dot(n.x, n.y, 'rgba(240,230,190,0.6)', 1.8); }; }
+  { const b = G.extraLights; G.extraLights = function (hole) { if (b) b(hole); const z = R.zone; if (z && z.subNotes) for (const n of z.subNotes) if (!n.gone) hole(n.x, n.y - 4, 50, 0.3); if (z && z.subBoard) hole(z.subBoard.x, z.subBoard.y - 30, 70, 0.25); }; }
+})();
+// ===== 0.63.9 서운 균열 손질 — 시조 판 없는 단계에서 +7~+18단이던 것(계산기 0.63.6). 기본은 낮추고 시조 판 몫을 키움 =====
+// 시조 판 숫자 칸은 3x_seoun(갈래 기술 +45% · 천재지변 +60% · 젖은 적 +35%). 여기는 기본 배율만.
+(function () {
+  const ALL = 0.72, EXTRA = { swcomet: 0.62, swfall: 0.62, swshower: 0.62, swdust: 0.62, swblade: 0.52, swbreeze: 0.52, swtwister: 0.52, swspout: 0.8, swspray: 1.15, swebb: 1.15, swflood: 1.15, swgauge: 1.15, swtide: 1.15 };
+  const M = G.BAL639 = {};
+  for (const id in G.SKILLS) if (G.SKILLS[id].cls === 'seoun' || (/^sw/.test(id) && id !== 'swap')) M[id] = ALL * (EXTRA[id] || 1);
+  { const b = G.hit; G.hit = function (m, dmg, o) { const sk = (o && o.sk) || G._sk; if (sk && M[sk] && dmg > 0 && G.S && G.S.cls === 'seoun') dmg *= M[sk]; return b.call(this, m, dmg, o); }; }
 })();
 // ===== 0.63.3 장비 이름 손질 (검토: 「[검토-세계관] 장비 이름 — 서운 무기 · 공용 장비」) =====
 // 1) 서운 전용 무기 · 보조 목록 연결  2) 바뀐 이름을 옛 저장 장비에도 적용  3) 서운이 빌려 쓰던 비술사 장비를 서운 것으로 바꿈
