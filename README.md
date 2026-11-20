@@ -1,4 +1,4 @@
-# 전승자: 잔등
+# 잔등 (Last Lantern)
 
 브라우저 액션 RPG. **https://glgl1349.github.io/jeonseungja-play/** 에서 바로 할 수 있어요(로그인 없음).
 
